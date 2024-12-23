@@ -1,6 +1,5 @@
 {
   "name": "@boilerplates/vercel",
-  "private": true,
   "type": "module",
   "version": "0.0.1",
   "description": "",

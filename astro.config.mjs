@@ -2,17 +2,32 @@
 import { defineConfig } from 'astro/config';
 
 import { env, vite } from './config';
-import { storyblok, sitemap, robots } from './config/integrations';
+import { favicons, storyblok, sitemap, robots } from './config/integrations';
 
 // https://astro.build/config
 export default defineConfig({
   site: env.SITE_URL,
+  trailingSlash: 'ignore',
   //
+  ...(await import('./config/vercel/server')).default,
+  //
+  vite,
+  integrations: [
+    favicons,
+    storyblok,
+    robots,
+    sitemap,
+  ],
+  //
+  compressHTML: import.meta.env.PROD,
   scopedStyleStrategy: 'attribute',
+  security: {
+    checkOrigin: true,
+  },
   build: {
+    format: 'file',
     inlineStylesheets: 'never',
     assets: '_app',
-    format: 'file',
     // assetsPrefix: env.SITE_URL
   },
   image: {
@@ -20,17 +35,6 @@ export default defineConfig({
   },
   //
   i18n: {
-    locales: ['en', 'zh-CN'],
-    defaultLocale: 'zh-CN',
+    locales: ['zh-CN', 'zh-HK', 'en'], defaultLocale: 'zh-CN'
   },
-  //
-  vite,
-  //
-  ...(await import('./config/vercel/server')).default,
-  //
-  integrations: [
-    storyblok,
-    robots,
-    sitemap,
-  ]
 });
