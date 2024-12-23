@@ -21,7 +21,6 @@ export default defineConfig({
   //
   i18n: {
     locales: ['en', 'zh-CN'],
-    //@ts-ignore
     defaultLocale: 'zh-CN',
   },
   //
