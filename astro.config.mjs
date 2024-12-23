@@ -4,8 +4,6 @@ import { defineConfig } from 'astro/config';
 import { env, vite } from './config';
 import { storyblok, sitemap, robots } from './config/integrations';
 
-console.log((await import('./config/vercel/server')).default)
-
 // https://astro.build/config
 export default defineConfig({
   site: env.SITE_URL,
@@ -23,6 +21,7 @@ export default defineConfig({
   //
   i18n: {
     locales: ['en', 'zh-CN'],
+    //@ts-ignore
     defaultLocale: 'zh-CN',
   },
   //
